@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recta de signos — Inecuaciones polinómicas · UCSS Filial Chulucanas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Quicksand','Trebuchet MS',sans-serif;color:#3C4A41;
+  background:radial-gradient(1100px 480px at 50% -120px,#DDF1F2 0%,transparent 70%),
+             linear-gradient(180deg,#BFE3EF 0%,#FBF6E9 36%,#FBF6E9 100%);
+  min-height:100vh;padding:20px 12px 40px;-webkit-font-smoothing:antialiased}
+#ucssInec{max-width:940px;margin:0 auto}
+#ucssInec .shell{background:linear-gradient(180deg,#BFE3EF 0%,#E2F2EA 30%,#FBF6E9 60%,#FBF6E9 100%);
+  border:1.5px solid #E4D9BE;border-radius:26px;padding:0 0 26px;overflow:hidden;
+  box-shadow:0 12px 30px rgba(60,74,65,.16)}
+/* hero */
+.hero{position:relative;overflow:hidden;padding:30px 24px 52px}
+.sol{position:absolute;top:16px;right:40px;width:84px;height:84px;border-radius:50%;
+  background:radial-gradient(circle at 38% 38%,#FFF3C9 0%,#E7B10A 80%);
+  box-shadow:0 0 46px 12px rgba(231,177,10,.35);opacity:.92}
+.nube{position:absolute;background:#fff;border-radius:60px;opacity:.92}
+.nube::before,.nube::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.n1{width:120px;height:32px;top:40px;left:44px}
+.n1::before{width:50px;height:50px;top:-22px;left:16px}.n1::after{width:36px;height:36px;top:-13px;left:58px}
+.n2{width:86px;height:24px;top:96px;left:230px;opacity:.8}
+.n2::before{width:38px;height:38px;top:-17px;left:12px}.n2::after{width:28px;height:28px;top:-9px;left:44px}
+.cerros{position:absolute;left:0;right:0;bottom:0;height:44px;
+  background:radial-gradient(60px 44px at 12% 100%,#6F8F87 0 99%,transparent 100%),
+             radial-gradient(80px 58px at 38% 100%,#7FA197 0 99%,transparent 100%),
+             radial-gradient(70px 50px at 64% 100%,#6F8F87 0 99%,transparent 100%),
+             radial-gradient(92px 62px at 90% 100%,#7FA197 0 99%,transparent 100%)}
+.pasto{position:absolute;left:0;right:0;bottom:0;height:13px;background:#358829;opacity:.55}
+.hero h1{position:relative;font-family:'Fraunces',Georgia,serif;font-weight:600;
+  font-size:clamp(25px,4.4vw,38px);margin:0;color:#3C4A41;letter-spacing:.4px;
+  text-shadow:0 1px 0 rgba(255,255,255,.6)}
+.hero .sub{position:relative;font-size:14px;color:#6C7A6E;margin-top:6px;font-weight:500}
+.hero .marca{position:relative;display:inline-block;margin-top:12px;font-weight:700;color:#4E6B62;
+  background:rgba(255,255,255,.62);padding:5px 14px;border-radius:999px;font-size:13px;letter-spacing:.5px}
+/* tarjetas */
+.card{background:#FBF6E9;border:1.5px solid #E4D9BE;border-radius:20px;padding:20px 20px 22px;
+  margin:0 18px 18px;box-shadow:0 6px 18px rgba(60,74,65,.10)}
+.card h2{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:19px;margin:0 0 4px;color:#6F8F87}
+.hint{font-size:13px;color:#6C7A6E;margin:0 0 14px}
+.toolbar{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;margin-bottom:6px}
+.grp{display:flex;flex-direction:column;gap:6px}
+.grp label{font-size:11px;font-weight:700;color:#6C7A6E;text-transform:uppercase;letter-spacing:.6px}
+select,.lead{font-family:inherit;font-weight:600;font-size:15px;color:#3C4A41;background:#fff;
+  border:1.5px solid #E4D9BE;border-radius:11px;padding:8px 12px;cursor:pointer}
+.lead{width:78px;text-align:center;cursor:text}
+#facs{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+.fac{background:#fff;border:1.5px solid #E4D9BE;border-radius:16px;padding:12px 14px;
+  box-shadow:0 2px 8px rgba(60,74,65,.06);animation:pop .25s ease}
+@keyframes pop{from{opacity:0;transform:translateY(6px) scale(.98)}to{opacity:1;transform:none}}
+.fhead{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.par{font-family:'Fraunces',Georgia,serif;font-size:30px;color:#6F8F87;line-height:1}
+.eq{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:20px;color:#3C4A41}
+.pw{font-size:15px;color:#6C7A6E;align-self:flex-start;margin-top:2px}
+.num{width:60px;text-align:center;font-family:inherit;font-weight:700;font-size:16px;border:0;
+  border-bottom:2px solid #D8E6E1;background:transparent;color:#3C4A41;padding:4px 2px}
+.num:focus{outline:none;border-bottom-color:#6F8F87}
+.exp{width:42px}
+.rm{margin-left:auto;border:0;background:transparent;color:#C58A8A;font-size:22px;cursor:pointer;
+  line-height:1;padding:2px 9px;border-radius:8px}
+.rm:hover{background:#FBEAEA;color:#C4622D}
+.sliders{display:grid;grid-template-columns:auto 1fr auto 1fr;gap:8px 12px;align-items:center;
+  margin-top:12px;padding-top:10px;border-top:1px dashed #E4D9BE}
+.sliders label{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:15px;color:#6C7A6E;text-align:right}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;
+  background:#D8E6E1;accent-color:#6F8F87;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;
+  border-radius:50%;background:#6F8F87;border:3px solid #fff;box-shadow:0 1px 4px rgba(60,74,65,.4);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#6F8F87;border:3px solid #fff;cursor:pointer}
+.addbig{display:block;width:100%;margin:18px 0 10px;border:0;border-radius:16px;cursor:pointer;
+  font-family:inherit;font-weight:700;font-size:19px;color:#fff;padding:16px 20px;letter-spacing:.4px;
+  background:linear-gradient(95deg,#358829 0%,#6F8F87 55%,#E7B10A 140%);
+  box-shadow:0 8px 20px rgba(53,136,41,.34);animation:glow 2.2s ease-in-out infinite;transition:transform .12s}
+.addbig:hover{transform:translateY(-2px) scale(1.01)}
+.addbig:active{transform:scale(.99)}
+@keyframes glow{0%,100%{box-shadow:0 8px 20px rgba(53,136,41,.30)}50%{box-shadow:0 8px 30px rgba(231,177,10,.50)}}
+.row2{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.ghost{font-family:inherit;font-weight:700;font-size:13px;border:1.5px solid #E4D9BE;background:#fff;
+  color:#6C7A6E;border-radius:999px;padding:8px 16px;cursor:pointer}
+.ghost:hover{border-color:#6F8F87;color:#6F8F87}
+.chip{font-family:inherit;font-size:12.5px;font-weight:600;background:#D8E6E1;border:0;border-radius:999px;
+  padding:6px 12px;color:#34534a;cursor:pointer}
+.chip:hover{background:#89CFF0;color:#0d3a52}
+.ejlab{font-size:12px;font-weight:700;color:#6C7A6E;margin-right:2px}
+.preview{margin-top:16px;background:linear-gradient(180deg,#fff,#EEF4EE);border:1.5px dashed #6F8F87;
+  border-radius:14px;padding:14px 16px;font-family:'Fraunces',Georgia,serif;font-size:clamp(18px,3.2vw,25px);
+  color:#3C4A41;text-align:center;line-height:1.5;word-break:break-word}
+.preview sup{font-size:.62em}.preview i{font-style:italic}
+.svgcard{background:linear-gradient(180deg,#FFFDF6,#FBF6E9);border:1.5px solid #E4D9BE;border-radius:16px;
+  padding:8px 4px 2px;overflow-x:auto}
+.svgcard svg{display:block;width:100%;height:auto;min-width:340px}
+.pcline{font-size:13.5px;color:#6C7A6E;font-weight:600;margin:14px 2px 2px;text-align:center}
+.pcline b{color:#6F8F87}
+.solbox{margin-top:14px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.et{font-size:13px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#6C7A6E}
+.val{font-family:'Fraunces',Georgia,serif;font-size:clamp(22px,4.6vw,33px);font-weight:600;color:#0d3a52;
+  background:linear-gradient(180deg,#fff,#DDF1F2);border:2px solid #89CFF0;border-radius:16px;padding:10px 22px;
+  box-shadow:0 4px 14px rgba(137,207,240,.35);min-width:120px;text-align:center}
+.vacio{color:#6C7A6E;text-align:center;padding:28px 10px;font-weight:600}
+.pie{text-align:center;font-size:12px;color:#6C7A6E;margin-top:6px}
+</style>
+</head>
+<body>
+<div id="ucssInec"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  var factors=[];          // { a, b, exp }  b lleva su signo (2 o -2)
+  var leadCoef=1, rel='ge';
+  var ejemplos=[
+    {lead:1, rel:'ge', f:[{a:1,b:-2,exp:1},{a:1,b:1,exp:1}]},
+    {lead:-1,rel:'lt', f:[{a:1,b:-3,exp:1},{a:1,b:1,exp:2},{a:1,b:2,exp:1}]},
+    {lead:1, rel:'le', f:[{a:1,b:4,exp:3},{a:1,b:-1,exp:2},{a:-1,b:3,exp:1}]}
+  ];
+
+  function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){var t=b;b=a%b;a=t;}return a||1;}
+  function raizDe(a,bs){var exact=Number.isInteger(a)&&Number.isInteger(bs);var num=-bs,den=a;
+    if(den<0){num=-num;den=-den;}if(exact){var g=gcd(num,den);num=Math.round(num/g);den=Math.round(den/g);}
+    return {val:(-bs/a),num:num,den:den,exact:exact};}
+  function dispRaiz(r){if(r.exact){return (r.den===1)?String(r.num):(r.num+'/'+r.den);}return parseFloat(r.val.toFixed(4)).toString();}
+  function dispNum(n){if(Number.isInteger(n))return String(n);return parseFloat(n.toFixed(4)).toString();}
+  function signPow(s,e){return (s<0&&(e%2===1))?-1:1;}
+  function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+
+  var root=document.getElementById('ucssInec');
+  var facsEl,relEl,leadEl,prevEl,svgEl,pcEl,solEl;
+
+  function renderRows(){
+    var html='';
+    factors.forEach(function(f,i){
+      html+='<div class="fac"><div class="fhead">'+
+        '<span class="par">(</span>'+
+        '<input class="num" data-i="'+i+'" data-f="a" type="number" step="1" value="'+f.a+'">'+
+        '<span class="eq">x</span>'+
+        '<input class="num" data-i="'+i+'" data-f="b" type="number" step="1" value="'+f.b+'">'+
+        '<span class="par">)</span><span class="pw">^</span>'+
+        '<input class="num exp" data-i="'+i+'" data-f="e" type="number" min="1" max="6" step="1" value="'+f.exp+'">'+
+        (factors.length>1?'<button class="rm" data-i="'+i+'" title="Quitar factor">&times;</button>':'')+
+        '</div><div class="sliders">'+
+        '<label>a</label><input class="rng" data-i="'+i+'" data-f="a" type="range" min="-6" max="6" step="1" value="'+clamp(f.a,-6,6)+'">'+
+        '<label>b</label><input class="rng" data-i="'+i+'" data-f="b" type="range" min="-12" max="12" step="1" value="'+clamp(f.b,-12,12)+'">'+
+        '</div></div>';
+    });
+    facsEl.innerHTML=html;
+  }
+
+  function leerModelo(){
+    facsEl.querySelectorAll('.fac').forEach(function(row){
+      var i=+row.querySelector('.num').dataset.i;
+      var a=parseFloat(row.querySelector('.num[data-f="a"]').value);
+      var b=parseFloat(row.querySelector('.num[data-f="b"]').value);
+      var e=parseInt(row.querySelector('.num[data-f="e"]').value,10);
+      factors[i].a=isNaN(a)?0:a; factors[i].b=isNaN(b)?0:b; factors[i].exp=(isNaN(e)||e<1)?1:e;
+    });
+    var lc=parseFloat(leadEl.value); leadCoef=isNaN(lc)?1:lc;
+  }
+
+  function coefStr(a){if(a===1)return '';if(a===-1)return '&minus;';return dispNum(a);}
+  function factorStr(f){var s='('+coefStr(f.a)+'<i>x</i>';
+    if(f.b>0)s+=' + '+dispNum(f.b);else if(f.b<0)s+=' &minus; '+dispNum(Math.abs(f.b));
+    s+=')';if(f.exp>1)s+='<sup>'+f.exp+'</sup>';return s;}
+  function relStr(){return {ge:'&ge; 0',gt:'&gt; 0',le:'&le; 0',lt:'&lt; 0'}[rel];}
+  function renderPreview(){
+    var lc=leadCoef<0?'&minus;'+(Math.abs(leadCoef)===1?'':dispNum(Math.abs(leadCoef))):(leadCoef===1?'':dispNum(leadCoef));
+    var p=lc+factors.map(factorStr).join(''); if(factors.length===0)p='P(x)'; p+=' &nbsp;'+relStr();
+    prevEl.innerHTML=p;
+  }
+
+  function calcular(){
+    var mapa={},orden=[],signInf=(leadCoef<0?-1:1),degenerado=false;
+    factors.forEach(function(f){var bs=f.b;
+      if(f.a===0){if(bs===0){degenerado=true;}else{signInf*=signPow(Math.sign(bs),f.exp);}return;}
+      signInf*=signPow(Math.sign(f.a),f.exp);
+      var r=raizDe(f.a,bs);var key=r.exact?(r.num+'/'+r.den):('~'+r.val.toFixed(6));
+      if(!mapa[key]){mapa[key]={raiz:r,mult:0};orden.push(key);}mapa[key].mult+=f.exp;});
+    var roots=orden.map(function(k){return mapa[k];});
+    roots.sort(function(x,y){return x.raiz.val-y.raiz.val;});
+    var k=roots.length,wantPos=(rel==='ge'||rel==='gt'),nonStrict=(rel==='ge'||rel==='le');
+    var sign=new Array(k+1);sign[k]=signInf;
+    for(var j=k-1;j>=0;j--)sign[j]=sign[j+1]*((roots[j].mult%2===1)?-1:1);
+    var intervalIn=sign.map(function(s){return wantPos?s>0:s<0;});
+    var pointIn=roots.map(function(){return nonStrict;});
+    return {roots:roots,k:k,sign:sign,intervalIn:intervalIn,pointIn:pointIn,
+            nonStrict:nonStrict,degenerado:degenerado,wantPos:wantPos,signInf:signInf};
+  }
+
+  function construirSolucion(R){
+    var k=R.roots.length;
+    if(R.degenerado)return R.nonStrict?'TODOS':'VACIO';
+    if(k===0){var ok=R.wantPos?R.signInf>0:R.signInf<0;return ok?'TODOS':'VACIO';}
+    var total=2*k+1;function isIn(p){return (p%2===0)?R.intervalIn[p/2]:R.pointIn[(p-1)/2];}
+    var segs=[],p=0;
+    while(p<total){if(!isIn(p)){p++;continue;}var start=p;while(p+1<total&&isIn(p+1))p++;var end=p;
+      var left,leftC,right,rightC,jj;
+      if(start%2===0){jj=start/2;if(jj===0){left=null;leftC=false;}else{left=R.roots[jj-1];leftC=false;}}else{jj=(start-1)/2;left=R.roots[jj];leftC=true;}
+      if(end%2===0){jj=end/2;if(jj===k){right=null;rightC=false;}else{right=R.roots[jj];rightC=false;}}else{jj=(end-1)/2;right=R.roots[jj];rightC=true;}
+      segs.push({left:left,leftC:leftC,right:right,rightC:rightC});p++;}
+    if(segs.length===0)return 'VACIO';
+    if(segs.length===1&&segs[0].left===null&&segs[0].right===null)return 'TODOS';
+    return segs.map(function(s){
+      if(s.left&&s.right&&s.left===s.right)return '{'+dispRaiz(s.left.raiz)+'}';
+      var lb=s.leftC?'[':'(',rb=s.rightC?']':')';
+      var lv=s.left===null?'&minus;&infin;':dispRaiz(s.left.raiz);
+      var rv=s.right===null?'+&infin;':dispRaiz(s.right.raiz);
+      if(s.left===null)lb='(';if(s.right===null)rb=')';
+      return lb+lv+', '+rv+rb;}).join(' &cup; ');
+  }
+
+  function dibujar(R){
+    if(factors.length===0){svgEl.innerHTML='<div class="vacio">Agrega al menos un factor para ver el gr&aacute;fico.</div>';return;}
+    var k=R.k,cell=130,padEnd=40,axisLeft=70,axisRight=axisLeft+(k+1)*cell,W=axisRight+70,baseY=150,arcRy=62;
+    function ix(i){return axisLeft+(i+1)*cell;}function cx(j){return axisLeft+(j+0.5)*cell;}
+    function bL(j){return axisLeft+j*cell;}function bR(j){return axisLeft+(j+1)*cell;}
+    var s='<svg viewBox="0 0 '+W+' 230" xmlns="http://www.w3.org/2000/svg" font-family="Quicksand, sans-serif">';
+    s+='<rect x="18" y="14" width="'+(W-36)+'" height="200" rx="20" fill="#FFFDF6" stroke="#EAE0C6" stroke-width="1.5"/>';
+    for(var j=0;j<=k;j++){var x1=bL(j),x2=bR(j),rx=(x2-x1)/2,inside=R.intervalIn[j];
+      var fill=inside?'rgba(111,143,135,.30)':'rgba(231,221,200,.45)';var stroke=inside?'#6F8F87':'#CBBF9F';
+      if(R.degenerado){fill='rgba(231,221,200,.45)';stroke='#CBBF9F';}
+      s+='<path d="M '+x1+' '+baseY+' A '+rx+' '+arcRy+' 0 0 1 '+x2+' '+baseY+'" fill="'+fill+'" stroke="'+stroke+'" stroke-width="1.6"/>';}
+    var aL=axisLeft-padEnd,aR=axisRight+padEnd;
+    s+='<line x1="'+aL+'" y1="'+baseY+'" x2="'+aR+'" y2="'+baseY+'" stroke="#566B5E" stroke-width="3" stroke-linecap="round"/>';
+    s+='<path d="M '+(aL+11)+' '+(baseY-7)+' L '+aL+' '+baseY+' L '+(aL+11)+' '+(baseY+7)+'" fill="none" stroke="#566B5E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
+    s+='<path d="M '+(aR-11)+' '+(baseY-7)+' L '+aR+' '+baseY+' L '+(aR-11)+' '+(baseY+7)+'" fill="none" stroke="#566B5E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
+    for(var j2=0;j2<=k;j2++){var ss=R.sign[j2],sym=ss>0?'+':'&minus;',col=ss>0?'#358829':'#C4622D';
+      if(R.degenerado){sym='0';col='#9AA59B';}
+      s+='<text x="'+cx(j2)+'" y="'+(baseY-22)+'" text-anchor="middle" font-size="30" font-weight="700" fill="'+col+'">'+sym+'</text>';}
+    var closed=R.nonStrict;
+    for(var i=0;i<k;i++){var px=ix(i);
+      if(closed)s+='<circle cx="'+px+'" cy="'+baseY+'" r="8.5" fill="#2F4A3E" stroke="#fff" stroke-width="1.5"/>';
+      else s+='<circle cx="'+px+'" cy="'+baseY+'" r="8" fill="#FFFDF6" stroke="#2F4A3E" stroke-width="2.4"/>';
+      s+='<text x="'+px+'" y="'+(baseY+30)+'" text-anchor="middle" font-size="17" font-weight="700" fill="#3C4A41">'+dispRaiz(R.roots[i].raiz)+'</text>';
+      if(R.roots[i].mult>1)s+='<text x="'+px+'" y="'+(baseY+48)+'" text-anchor="middle" font-size="11.5" font-weight="600" fill="#8A9588">mult. '+R.roots[i].mult+'</text>';}
+    s+='<text x="'+aL+'" y="'+(baseY+30)+'" text-anchor="middle" font-size="16" font-weight="700" fill="#8A9588">&minus;&infin;</text>';
+    s+='<text x="'+aR+'" y="'+(baseY+30)+'" text-anchor="middle" font-size="16" font-weight="700" fill="#8A9588">+&infin;</text>';
+    s+='</svg>'; svgEl.innerHTML=s;
+  }
+
+  function renderPC(R){
+    if(factors.length===0||R.degenerado){pcEl.innerHTML='';return;}
+    if(R.roots.length===0){pcEl.innerHTML='<b>Sin puntos cr&iacute;ticos</b> (la expresi&oacute;n es constante).';return;}
+    var lista=R.roots.map(function(r){return dispRaiz(r.raiz)+(r.mult>1?' (m='+r.mult+')':'');}).join(',&nbsp;&nbsp;');
+    pcEl.innerHTML='<b>Puntos cr&iacute;ticos:</b> x = '+lista;
+  }
+
+  function renderSolucion(R){
+    var sol=construirSolucion(R);
+    if(factors.length===0){solEl.innerHTML='&empty;';return;}
+    if(sol==='TODOS')solEl.innerHTML='&#8477; <span style="font-size:.6em;color:#6C7A6E">(todos los reales)</span>';
+    else if(sol==='VACIO')solEl.innerHTML='&empty;';
+    else solEl.innerHTML='x &isin; '+sol;
+  }
+
+  function actualizar(){renderPreview();var R=calcular();dibujar(R);renderPC(R);renderSolucion(R);}
+
+  function build(){
+    root.innerHTML=
+    '<div class="shell"><div class="hero">'+
+      '<div class="sol"></div><div class="nube n1"></div><div class="nube n2"></div>'+
+      '<div class="cerros"></div><div class="pasto"></div>'+
+      '<h1>Recta de signos</h1>'+
+      '<div class="sub">Inecuaciones polin&oacute;micas &middot; arma tus factores y obt&eacute;n el conjunto soluci&oacute;n</div>'+
+      '<div class="marca">UCSS &middot; Matem&aacute;tica &middot; Filial Chulucanas</div>'+
+    '</div>'+
+    '<div class="card"><h2>1. Arma tu inecuaci&oacute;n</h2>'+
+      '<p class="hint">Escribe cada factor (a&middot;x + b). El signo va en el n&uacute;mero: por ejemplo <b>2</b> o <b>&minus;2</b>. Mueve los deslizadores para variar a y b.</p>'+
+      '<div class="toolbar">'+
+        '<div class="grp"><label>Coef. principal</label><input id="lead" class="lead num" type="number" step="1" value="1"></div>'+
+        '<div class="grp"><label>Relaci&oacute;n</label><select id="rel">'+
+          '<option value="ge">P(x) &ge; 0</option><option value="gt">P(x) &gt; 0</option>'+
+          '<option value="le">P(x) &le; 0</option><option value="lt">P(x) &lt; 0</option></select></div>'+
+      '</div>'+
+      '<div id="facs"></div>'+
+      '<button class="addbig" id="add">&#43;&nbsp; AGREGAR FACTOR</button>'+
+      '<div class="row2"><button class="ghost" id="clr">Limpiar</button>'+
+        '<span class="ejlab">Ejemplos:</span>'+
+        '<button class="chip" data-ej="0">(x&minus;2)(x+1) &ge; 0</button>'+
+        '<button class="chip" data-ej="1">&minus;(x&minus;3)(x+1)&sup2;(x+2) &lt; 0</button>'+
+        '<button class="chip" data-ej="2">(x+4)&sup3;(x&minus;1)&sup2;(&minus;x+3) &le; 0</button>'+
+      '</div>'+
+      '<div class="preview" id="prev"></div>'+
+    '</div>'+
+    '<div class="card"><h2>2. Gr&aacute;fico y conjunto soluci&oacute;n</h2>'+
+      '<div class="svgcard" id="svg"></div>'+
+      '<div class="pcline" id="pc"></div>'+
+      '<div class="solbox"><div class="et">Conjunto soluci&oacute;n</div><div class="val" id="sol">&empty;</div></div>'+
+      '<div class="pie">Punto relleno = extremo incluido &nbsp;&middot;&nbsp; punto vac&iacute;o = extremo excluido.</div>'+
+    '</div></div>';
+
+    facsEl=document.getElementById('facs');relEl=document.getElementById('rel');
+    leadEl=document.getElementById('lead');prevEl=document.getElementById('prev');
+    svgEl=document.getElementById('svg');pcEl=document.getElementById('pc');solEl=document.getElementById('sol');
+
+    document.getElementById('add').addEventListener('click',function(){factors.push({a:1,b:0,exp:1});renderRows();actualizar();});
+    document.getElementById('clr').addEventListener('click',function(){factors=[{a:1,b:0,exp:1}];renderRows();actualizar();});
+    relEl.addEventListener('change',function(){rel=this.value;actualizar();});
+    leadEl.addEventListener('input',function(){leerModelo();actualizar();});
+    facsEl.addEventListener('input',function(e){
+      var t=e.target,i=t.dataset.i,f=t.dataset.f;
+      if(t.classList.contains('rng')){var n=facsEl.querySelector('.num[data-i="'+i+'"][data-f="'+f+'"]');if(n)n.value=t.value;}
+      else if(t.classList.contains('num')){var r=facsEl.querySelector('.rng[data-i="'+i+'"][data-f="'+f+'"]');if(r){var v=parseFloat(t.value);if(!isNaN(v))r.value=clamp(v,+r.min,+r.max);}}
+      leerModelo();actualizar();});
+    facsEl.addEventListener('click',function(e){if(e.target.classList.contains('rm')){factors.splice(+e.target.dataset.i,1);renderRows();actualizar();}});
+    root.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(){
+      var ej=ejemplos[+this.dataset.ej];leadCoef=ej.lead;rel=ej.rel;leadEl.value=ej.lead;relEl.value=ej.rel;
+      factors=ej.f.map(function(o){return {a:o.a,b:o.b,exp:o.exp};});renderRows();actualizar();});});
+
+    factors=[{a:1,b:-2,exp:1},{a:1,b:1,exp:1}];renderRows();actualizar();
+  }
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+</body>
+</html>
